@@ -80,3 +80,34 @@ where `*` is a wildcard character that matches everything.
 Password: 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
 
 #### Level 6
+We need to find a file in the inhere directory that has all the following properties:
+
+- human-readable
+- 1033 bytes in size
+- not executable
+
+Going through the [find](https://manpages.ubuntu.com/manpages/noble/man1/find.1.html) manual, we can find the optional parameters that allow us to specify the type of file we are looking for.
+
+Human-readable is very vague but we can assume that this is referring to a regular file. We can attach the optional parameter `-type` along with what type we are looking for. In this case, `f` refers to regular files.
+
+`-type f`
+
+Finding a file with a particular size can be done using the `-size` option. Add a number and a suffix after to denote the particular size and measure. To find files that are exactly 1033 bytes in size, use (where `c` denotes bytes):
+
+`-size 1033c`
+
+Lastly, to find files that are not executable, scouring through the manual, we can find the `-executable` command. This looks for all files that are executable, however what we want is files that are **not** executable. You can use the `!` expression or `-not` to find the opposite.
+
+> The `!` usually will need protection from interpretation by the shell
+> so it is better to use escape it using `\!`
+
+`\! -executable`
+
+Therefore, the full line to find the file we are looking for is:
+
+`find -type f -size 1033c \! -executable`
+
+Password: HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+
+#### Level 7
+
