@@ -99,7 +99,7 @@ Finding a file with a particular size can be done using the `-size` option. Add 
 Lastly, to find files that are not executable, scouring through the manual, we can find the `-executable` command. This looks for all files that are executable, however what we want is files that are **not** executable. You can use the `!` expression or `-not` to find the opposite.
 
 > The `!` usually will need protection from interpretation by the shell
-> so it is better to use escape it using `\!`
+> so it is better to escape it using `\!`
 
 `\! -executable`
 
@@ -110,4 +110,27 @@ Therefore, the full line to find the file we are looking for is:
 Password: HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
 
 #### Level 7
+We need to find a file that has all the following properties:
 
+- owned by user bandit7
+- owned by group bandit6
+- 33 bytes in size
+
+As per usual, we must use the `find` command and to make sure this looks everywhere, you can use `find /*` which searches everything from the root directory.
+
+Two new optional parameters must be attached; `-group groupname` and `-user username` which looks for anything that is owned by `groupname` and `username` respectively.
+
+The other necessary components have already been covered in the previous level. Thus the full line to find the file we are looking for is:
+
+`find /* -type f -size 33c -group bandit6 -user bandit7 2>/dev/null`
+
+> The `2>/dev/null` here removes all error messages as
+> if you tried to run this line without it, there would
+> be lots of 'Permission Denied' messages for files that
+> we do not have access for so to make things easier to
+> find the file that is accessable, you can hide all the
+> unnecessary information.
+
+Password: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+
+#### Level 8
