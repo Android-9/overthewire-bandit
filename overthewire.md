@@ -41,4 +41,27 @@ Or another common approach is to specify the full location of the file using `./
 
 `cat ./-`
 
+Password: 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+
 #### Level 3
+Spaces are also interpreted by linux bash as extra parameters, you could say. So reading the file using `cat spaces in the filename` would not work. It would only register the first parameter `cat` but not recognize the other words that are part of the file name.
+
+An easy fix for this is to put quote around it like this:
+
+`cat "spaces in the filename"`
+
+Password: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+#### Level 4
+Hidden files are denoted with a `.` at the start of their filename which causes them to be invisible through the usual `ls` command.
+
+However, `ls` has plenty of optional parameters, one being `-a` which makes it so that it lists all entries including ones that start with `.`.
+
+`ls -a`
+
+> In order to change to a different directory, use `cd 
+> directoryname`.
+
+Password: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+#### Level 5
