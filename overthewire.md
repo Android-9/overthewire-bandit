@@ -65,3 +65,18 @@ However, `ls` has plenty of optional parameters, one being `-a` which makes it s
 Password: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
 
 #### Level 5
+To find out about the type of a file, use the `file` command.
+
+For example, `file ./-file00` will print the output `./-file00: data` which shows that this file is in some 'data' format.
+
+What we really want though is a human-readable file like a text file.
+
+To display the types of each file in the current working directory, you can use:
+
+`file ./*`
+
+where `*` is a wildcard character that matches everything.
+
+Password: 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+#### Level 6
