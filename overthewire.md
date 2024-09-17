@@ -24,4 +24,21 @@ In order to read the contexts of a text file, you can use `cat`. There are also 
 
 `cat readme`
 
+Password: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+> Make sure to exit out of the ssh connection via 
+> `logout` and then connect again but with the username 
+> `bandit1`.
+
 #### Level 2
+`-` is a special character in linux bash. Therefore if you try and read it through the usual means `cat -`, this would not work because the `-` is reserved for attaching optional parameters to commands.
+
+The way you circumvent this is to either use redirection:
+
+`cat < -`
+
+Or another common approach is to specify the full location of the file using `./`:
+
+`cat ./-`
+
+#### Level 3
