@@ -134,3 +134,16 @@ The other necessary components have already been covered in the previous level. 
 Password: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
 
 #### Level 8
+We need to find the password in the file `data.txt` next to the word **millionth**.
+
+In order to match strings within a file, we must use the `grep` command.
+
+The `grep` command is used to search for patterns within files.
+
+We actually do not need to use any optional parameters to complete this challenge.
+
+Simply use the `grep` command by adding a string pattern in double quotes, and the file.
+
+`grep "millionth" data.txt`
+
+#### Level 9
