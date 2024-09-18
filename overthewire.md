@@ -146,4 +146,27 @@ Simply use the `grep` command by adding a string pattern in double quotes, and t
 
 `grep "millionth" data.txt`
 
+Password: dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+
 #### Level 9
+We need to find the password in the file `data.txt` and is the only line of text that occurs only once.
+
+There are two necessary commands to find the correct password; `sort` and `uniq`.
+
+The `uniq` command finds repeated lines adjacent to each other in a file. So if one line and the line right after that are the same, this would count as a repeated line. The optional parameter `-u` would find all unique lines.
+
+The `sort` command simply sorts all lines in ascending order in a file.
+
+We also need another special operator known as the pipe or `|`. This allows you to use the output of one command for the input of another.
+
+`command1 file1 | command2`
+
+What this will do is run `command1` on file1, and then take the output of that as the input of `command2`.
+
+So in order to print all unique lines, we would need to sort them first so that `uniq` correctly identifies all duplicate lines and gets rid of them, then we can apply `uniq -u` to search for unique lines.
+
+`sort data.txt | uniq -u`
+
+Password: 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+
+#### Level 10
