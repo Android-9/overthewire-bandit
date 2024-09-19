@@ -170,3 +170,25 @@ So in order to print all unique lines, we would need to sort them first so that 
 Password: 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
 
 #### Level 10
+We are again tasked with finding the password in the file `data.txt` and we are told that it is in one of the few human-readable strings, preceded by several '=' characters.
+
+A new command that will come in very handy for this level is the `strings` command. This prints strings of printable characters in a file. So this works great for our purpose because if you were to try and read the `data.txt` file, you would find that it is full of non-human-readable text.
+
+After we eliminate the unnecessary data, we are left with a more digestable number of lines that we can go through.
+
+But, we can do better than that to narrow our search down to only a couple lines. We are told that the password is preceded by several '=' characters, so we can simply use `grep` to look for lines that start with or just have those characters. By default, `grep` finds all matches including partial matches so as long as the line has the pattern somewhere, it will be registered as a match.
+
+Therefore, what we can do is search for lines that have, say, at least three '=' characters.
+
+`grep "==="`
+
+Like the previous level, we can pass the output from the `strings` command onto `grep` to find the matches.
+
+`strings data.txt | grep "==="`
+
+We will end up with a few matches, with the last one being the password for bandit10.
+
+Password: FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+
+#### Level 11
+
