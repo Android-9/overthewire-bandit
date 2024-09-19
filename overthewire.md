@@ -210,11 +210,11 @@ The command `tr` helps to translate or delete characters from standard input. Fr
 
 So, to shift the text back 13 positions to decode the password, you need to map `N-ZA-M` to `A-Z`.
 
-What this does is map 'N' to 'A', ... , 'Z' to 'M', ..., 'M' to 'Z'.
+What this does is map 'N' to 'A', ... , 'Z' to 'M', ... , 'M' to 'Z'.
 
 <table>
   <tr>
-    <td>Input </td>
+    <td>Input</td>
     <td>
         <kbd>
             <span style="color: darkred">ABCDEFGHIJKLM</span>
@@ -241,7 +241,7 @@ What this does is map 'N' to 'A', ... , 'Z' to 'M', ..., 'M' to 'Z'.
 > upper-case. Read the manual page for more information.
 
 > A helpful StackExchange answer: [Changing Individual Letter Position 
-> with Bash](https://askubuntu.comquestions1097761changing-individual-letter-position-with-bash)
+> with Bash](https://askubuntu.com/questions/1097761/changing-individual-letter-position-with-bash)
 
 Password: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
 
