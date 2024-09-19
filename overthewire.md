@@ -200,3 +200,49 @@ The command by default encodes data to a base64 format in a file, not the other 
 Password: dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
 
 #### Level 12
+We are told that all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions. This is known as [ROT13](https://en.wikipedia.org/wiki/ROT13) and is in fact a variation of the famous Caesar cipher.
+
+<div align="center"><img width="275" height="175" src="https://upload.wikimedia.org/wikipedia/commons/3/33/ROT13_table_with_example.svg" /></div>
+
+The letter 'A' becomes 'N', 'B' becomes 'O' and so forth. You can see that instead of A-Z it becomes N-Z and then A-M.
+
+The command `tr` helps to translate or delete characters from standard input. From the [manual page](https://man7.org/linux/man-pages/man1/tr.1.html) it can be found that in order to translate or map letters to a different set by shifting like in Caesar ciphers, you have to specify two strings; the characters you would like to map, and the new set of characters that you would like the original ones to map to.
+
+So, to shift the text back 13 positions to decode the password, you need to map `N-ZA-M` to `A-Z`.
+
+What this does is map 'N' to 'A', ... , 'Z' to 'M', ..., 'M' to 'Z'.
+
+<table>
+  <tr>
+    <td>Input </td>
+    <td>
+        <kbd>
+            <span style="color: darkred">ABCDEFGHIJKLM</span>
+            <span style="color: darkblue">NOPQRSTUVWXYZ</span>
+        </kbd>
+    </td>
+  </tr>
+  <tr>
+    <td>Output</td>
+    <td>
+        <kbd>
+            <span style="color: darkred">NOPQRSTUVWXYZ</span>
+            <span style="color: darkblue">ABCDEFGHIJKLM</span>
+        </kbd>
+    </td>
+  </tr>
+</table>
+
+<br>
+
+`cat data.txt | tr 'n-za-mN-ZA-M' 'a-zA-Z'`
+
+> The duplicate lower case version is simply to capture lower and
+> upper-case. Read the manual page for more information.
+
+> A helpful StackExchange answer: [Changing Individual Letter Position 
+> with Bash](https://askubuntu.comquestions1097761changing-individual-letter-position-with-bash)
+
+Password: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+#### Level 13
