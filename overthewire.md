@@ -246,3 +246,23 @@ What this does is map 'N' to 'A', ... , 'Z' to 'M', ... , 'M' to 'Z'.
 Password: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
 
 #### Level 13
+We are told that the file `data.txt` is a [hexdump](https://en.wikipedia.org/wiki/Hex_dump) of a file that has been repeatedly compressed.
+
+The first thing to do is to follow the hint given in the problem, create a directory under `/tmp` to work with files because new decompressed files will likely be created. You do not have access to create files in the root directory.
+
+To do this, you can use the helpful command provided, `mktemp -d` which will create a directory with a random name under `/tmp`. Next, you should copy the file with `cp` and move it to the new temporary directory. Read the [cp](https://linux.die.net/man/1/cp) manual for more information.
+
+```bash
+bandit12@bandit:~$ mktemp -d
+/tmp/tmp.Shcv8OwKyH
+bandit12@bandit:~$ cd /tmp/tmp.Shcv8OwKyH
+bandit12@bandit:/tmp/tmp.Shcv8OwKyH$ cp ~/data.txt abc
+bandit12@bandit:/tmp/tmp.Shcv8OwKyH$ ls
+abc
+```
+
+Now, we can begin.
+
+`xxd` is a command that can create a hexdump from a file, or do the reverse. In this case, we need to reverse the process, so using the [manual](https://linux.die.net/man/1/xxd), we find that in order to convert a hexdump back to its original binary form, use the `-r` option.
+
+`xxd -r abc new`
