@@ -191,4 +191,12 @@ We will end up with a few matches, with the last one being the password for band
 Password: FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
 
 #### Level 11
+For encoding a string to base64 or decoding base64 encoded data, the `base64` command comes in handy.
 
+The command by default encodes data to a base64 format in a file, not the other way around, so if you want to decode, the `base64` command has an option `-d` which does exactly that.
+
+`base64 -d data.txt`
+
+Password: dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+
+#### Level 12
