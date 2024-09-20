@@ -15,6 +15,10 @@ To specify a login username, you attach `-l username` to the end.
 
 `ssh bandit.labs.overthewire.org -p 2220 -l bandit0`
 
+Alternatively, you can also login via this approach:
+
+`ssh bandit0@bandit.labs.overthewire.org -p 2220`
+
 #### Level 1
 Use the `ls` command to list all files in the current working directory.
 
@@ -325,3 +329,20 @@ After that, it is just repeatedly finding the type of the file, renaming it, and
 Password: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 
 #### Level 14
+To login to bandit14, we can use the private SSH key from the root directory. Use the `-i` flag in conjunction with the `ssh` command. Refer back to the [ssh](https://linux.die.net/man/1/ssh) manual for further information.
+
+`ssh localhost -p 2220 -l bandit14 -i sshkey.private`
+
+Or,
+
+`ssh bandit14@localhost -p 2220 -i sshkey.private`
+
+Because we are already on the remote server and would like to login as a different user, `localhost` is used, which refers to the hostname of the machine you are currently working on.
+
+After successfully logging in, we can simply read the file that contains the password from the location given.
+
+`cat /etc/bandit_pass/bandit14`
+
+Password: MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+
+#### Level 15
