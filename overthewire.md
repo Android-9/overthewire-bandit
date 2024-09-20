@@ -329,7 +329,7 @@ After that, it is just repeatedly finding the type of the file, renaming it, and
 Password: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 
 #### Level 14
-To login to bandit14, we can use the private SSH key from the root directory. Use the `-i` flag in conjunction with the `ssh` command. Refer back to the [ssh](https://linux.die.net/man/1/ssh) manual for further information.
+To login to bandit14, we can use the private [SSH](https://help.ubuntu.com/community/SSH/OpenSSH/Keys) key from the root directory. Use the `-i` flag in conjunction with the `ssh` command. Refer back to the [ssh](https://linux.die.net/man/1/ssh) manual for further information.
 
 `ssh localhost -p 2220 -l bandit14 -i sshkey.private`
 
@@ -346,3 +346,27 @@ After successfully logging in, we can simply read the file that contains the pas
 Password: MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
 
 #### Level 15
+We are told that the password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+
+Going through some of the commands that may be useful, we find the `telnet` command which is used to communicate with another host using the TELNET protocol. The format follows like this:
+
+`telnet [ip_address][port]`
+
+So, in order to communicate with the localhost on port 30000:
+
+`telnet localhost 30000`
+
+Doing so will connect you to that port, and you can begin submitting messages.
+
+Submitting the pasword for the previous level yields the next password.
+
+Password: 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+
+---
+**Reading Material**
+> [How the Internet Works in 5 Minutes](https://www.youtube.com/watch?v=7_LPdttKXPc) (Not entirely accurate but good enough) <br>
+> [IP Addresses](https://computer.howstuffworks.com/web-server5.htm) <br>
+> [Localhost](https://en.wikipedia.org/wiki/Localhost) <br>
+> [Ports](https://computer.howstuffworks.com/web-server8.htm)
+
+#### Level 16
