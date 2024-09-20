@@ -266,3 +266,62 @@ Now, we can begin.
 `xxd` is a command that can create a hexdump from a file, or do the reverse. In this case, we need to reverse the process, so using the [manual](https://linux.die.net/man/1/xxd), we find that in order to convert a hexdump back to its original binary form, use the `-r` option.
 
 `xxd -r abc new`
+
+Where 'new' is just an arbitary name for the output file.
+
+Now that we have converted the hexdump back to its original binary form, the next step is to start decompressing it. However before that, we need to know the type of the file / compression in order to determine what decompression to use.
+
+To do this, look at the first few bytes in the hexdump to find the file signature. Every file type has an accompanying file signature, a whole list of them can be found [online](https://en.wikipedia.org/wiki/List_of_file_signatures).
+
+Either you can:
+
+`cat abc | head -n 1`
+
+Or,
+
+`xxd new | head -n 1`
+
+> Note that the `head` command simply prints the first ten
+> lines of a file but we can adjust it manually by adding the
+> option `-n` followed by the number of lines you want to be
+> printed.
+
+Both do exactly the same thing, as the former just prints the hexdump, and the latter creates the hexdump of the just created original binary form of the hexdump and prints the data.
+
+Regardless, you will find the result to be:
+
+`00000000: 1f8b 0808 dfcd eb66 0203 6461 7461 322e  .......f..data2.`
+
+If you search the first two bytes **1F 8B** in the list of file signatures, you will find that it corresponds to the GZIP compressed file format.
+
+This is in fact what the `file` command does. It reads the hexdump of a file to determine what the format is. So, alternatively to make things easier, you can just use this command.
+
+`file filename`
+
+Given that we now know that it is a GZIP compressed file, we first need to rename the file by adding the extension `gz` before running the `gzip` command.
+
+`mv new new.gz`
+
+Next, run the `gzip` command with the option `-d` to decompress instead of compress. Read the [gzip](https://linux.die.net/man/1/gzip) manual for more information.
+
+`gzip -d new.gz`
+
+After decompressing, it can be found again by using `file` that the format is now a compressed file using Bzip2 algorithm. We can go through similar steps by renaming the file and then running the `bzip` command.
+
+`mv new new.bz2`
+
+`bzip2 -d new.bz2`
+
+Read the [bzip2](https://linux.die.net/man/1/bzip2) manual for more information.
+
+Follow the same process once more and then you will find that the file is now in the format of a POSIX tar archive. Rename the file to have the extension `.tar`, then we can use the `tar` command and the option `-xf` to extract all files from the archive. Read the [tar](https://linux.die.net/man/1/tar) manual for more information.
+
+`tar -xf new`
+
+This will extract a new file called `data5.bin`.
+
+After that, it is just repeatedly finding the type of the file, renaming it, and then running the appropriate command.
+
+Password: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+
+#### Level 14
