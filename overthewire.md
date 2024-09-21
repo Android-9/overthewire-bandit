@@ -551,7 +551,7 @@ You can make it so bash does not run the `.bashrc` file. There is a command `bas
 
 Then you can just read the file using `cat`.
 
-###### Approach #3
+##### Approach #3
 You can also do something similar to the first approach and invoke another bash shell like this:
 
 `ssh bandit18@bandit.labs.overthewire.org -p 2220 /bin/bash`
@@ -578,5 +578,7 @@ It directly tells you that you can run commands as another user (in this case ba
 `./bandit20-do cat /etc/bandit_pass/bandit20`
 
 Password: 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+
+---
 
 #### Level 21
