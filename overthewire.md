@@ -414,7 +414,7 @@ So, by following the instructions:
 
 This creates a secure connection to the localhost on port 30001 and we can again proceed by entering last level's password. Lo and behold, the response will be the password to move onto the next level.
 
-Password: 
+Password: kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
 
 ---
 
@@ -425,3 +425,89 @@ Password:
 ---
 
 #### Level 17
+We are told that the credentials for the next level can be found by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First, we should find which ports have a server listening on them, then find out which of those speak SSL/TLS. Then just test each server as only one of them will give the credentials.
+
+To look for all ports that have a server listening on them, we can make use of a powerful tool called [Nmap](https://nmap.org/book/toc.html) which is at its core, a network scanner.
+
+To scan all open ports of a host, simply use:
+
+`nmap hostname`
+
+To specify a port range to scan through, use the option `-p` followed by `somenumber-anothernumber`.
+
+Putting this all together we have:
+
+`nmap localhost -p 31000-32000`
+
+Nmap will print a scan report:
+```
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-21 07:12 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00019s latency).
+Not shown: 996 closed tcp ports (conn-refused)
+PORT      STATE SERVICE
+31046/tcp open  unknown
+31518/tcp open  unknown
+31691/tcp open  unknown
+31790/tcp open  unknown
+31960/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 0.10 seconds
+```
+Based on this report, we can see that only the ports 31046, 31518, 31691, 31790, and 31960 are open. However, all of their services are unknown.
+
+We can use `nmap` again but this time enable [service and version detection](https://nmap.org/book/man-version-detection.html) via the option  `-sV`. Now that the possible port numbers have been narrowed down, we only need to specify those ports to be scanned to speed up the search.
+
+`nmap -sV localhost -p 31046,31518,31691,31790,31960`
+
+> While this is not necessary, we can make this process much faster by adding two additional parameters, `--version-light` and `-T4`. You can read up on the details of changing the version intensity via the link earlier on service and version detection, and the timing templates' documentation is linked [here](https://nmap.org/book/performance-timing-templates.html).
+>
+> `nmap -sV localhost -p 31046,31518,31691,31790,31960 --version-light -T4`
+
+After the scan is done, you should see the report:
+```
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-21 07:16 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00015s latency).
+Not shown: 996 closed tcp ports (conn-refused)
+PORT      STATE SERVICE     VERSION
+31046/tcp open  echo
+31518/tcp open  ssl/echo
+31691/tcp open  echo
+31790/tcp open  ssl/unknown
+31960/tcp open  echo
+```
+
+We can observe that only ports 31518 and 31790 speak SSL. Now this is just a matter of connecting to each one and submitting the current password to find the one that responds with the credentials.
+
+Remember `openssl s_client -connect localhost:portnumber`.
+
+> If you are encountering problems with submitting the password like "DONE", "RENOGOTIATING" or "KEYUPDATE", add an option `-quiet` at the end. For more information, read this [section](https://linux.die.net/man/1/s_client#:~:text=for%20all%20others.-,Connected%20Commands,-If%20a%20connection) in the `s_client` manual page.
+
+What you will find is that port number 31790 is the correct server. The responese will be in the form of an RSA private key, however it is not really usable at the moment because we need it in a file.
+
+So, we will have to create another temporary directory with `mktemp -d`. Navigate to this directory for easier access.
+
+Now, repeat the same thing but this time, redirect the output to a new file.
+
+`openssl s_client -connect localhost:31790 > private.key`
+
+If we were to now try and use `ssh` with the private key as previously done in Level 14, we will be met with an error stating that the private key is too open, and private key files should not accessible by others. To fix this, change the permissions to be more restrictive.
+
+`chmod 400 private.key`
+
+Now try again, and you should be logged into bandit17.
+
+Simiarly with Level 14, you can find the password with `cat /etc/bandit_pass/bandit17`.
+
+Password: EReVavePLFHtFlFsjn3hyzMlvSuSAcRD
+
+---
+
+**Reading Material**
+> [What is a Port Scanner](https://en.wikipedia.org/wiki/Port_scanner) <br>
+> [chmod](https://www.geeksforgeeks.org/chmod-command-linux/)
+
+---
+
+#### Level 18
