@@ -511,3 +511,21 @@ Password: EReVavePLFHtFlFsjn3hyzMlvSuSAcRD
 ---
 
 #### Level 18
+There are two files in the home directory: `passwords.old` and `passwords.new`. We are told the password for the next level is in `passwords.new` and is the only line that has been changed between the two files.
+
+The `diff` command compares files line by line and by default prints the differences betweeen the files. For more information, refer to the [diff](https://linux.die.net/man/1/diff) manual page.
+
+`diff passwords.new passwords.old`
+
+The output will look like this:
+```
+42c42
+< x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+---
+> ktfgBvpMzWKR5ENj26IbLGSblgUG9CzB
+```
+The first password corresponds to the first file (`passwords.new`) and the second password corresponds to the second file (`passwords.old`). Given that the password is in the `passwords.new` file, it must be the first one.
+
+Password: x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+
+#### Level 19
