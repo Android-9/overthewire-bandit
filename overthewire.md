@@ -529,3 +529,41 @@ The first password corresponds to the first file (`passwords.new`) and the secon
 Password: x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
 
 #### Level 19
+The password for the next level is simply in a file `readme` in the home directory. However, the issue is when you try and login normally with `ssh` it logs you out immediately with a message "Byebye!".
+
+As mentioned in the level description, it has something to do with the **.bashrc** file being modified. This file is a shell script that runs whenever a new bash session is initialized. You can put commands just like you can in an interactive shell and the main purpose is to setup and/or personalize their shell environment. Read more information about [bashrc](https://ultahost.com/knowledge-base/bashrc-file-in-linux/#:~:text=bashrc%20file%20is%20a%20shell,environment%20variables%2C%20and%20executing%20commands.). 
+
+There are actually a myriad of ways you can approach this problem.
+
+##### Approach #1
+One way is if you return to the [ssh](https://www.man7.org/linux/man-pages/man1/bash.1.html) manual page, you will find that you can actually input commands such as `ls` that will run when connected to the remote server before the .bashrc runs. So, you could do this:
+
+`ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme`
+
+##### Approach #2
+You can make it so bash does not run the `.bashrc` file. There is a command `bash` that allows you to specify certain aspects of how you want the interactive session to be. One of the options is `--norc` which will change the behavior when starting the bash session to not read and execute the initialization file. Read more information about the [bash](https://man7.org/linux/man-pages/man1/bash.1.html) command.
+
+`ssh bandit18@bandit.labs.overthewire.org -p 2220 bash --norc`
+
+> Note that you won't see a prompt because the [ps1](https://wiki.archlinux.org/title/Bash/Prompt_customization#:~:text=Bash%20has%20five%20prompt%20strings,a%20multi%2Dline%20command) is not set but that is just a side effect of forcing the bash terminal to not execute the .bashrc file. You can input commands as normal but it will just be a bit strange.
+>
+> If you would like to have something that resembles more like a usual interactive shell, you can attach `-t` which forces a pseudo-terminal allocation.
+
+Then you can just read the file using `cat`.
+
+###### Approach #3
+You can also do something similar to the first approach and invoke another bash shell like this:
+
+`ssh bandit18@bandit.labs.overthewire.org -p 2220 /bin/bash`
+
+Alternatively, you can use the flag `-t` like in the second approach to force a pseudo-terminal, that way you're able to run `/bin/sh`.
+
+`ssh -t bandit18@bandit.labs.overthewire.org -p 2220 /bin/sh`
+
+<br>
+
+Password: cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+
+---
+
+#### Level 20
