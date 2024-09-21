@@ -19,6 +19,8 @@ Alternatively, you can also login via this approach:
 
 `ssh bandit0@bandit.labs.overthewire.org -p 2220`
 
+---
+
 #### Level 1
 Use the `ls` command to list all files in the current working directory.
 
@@ -34,6 +36,8 @@ Password: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
 > `logout` and then connect again but with the username 
 > `bandit1`.
 
+---
+
 #### Level 2
 `-` is a special character in linux bash. Therefore if you try and read it through the usual means `cat -`, this would not work because the `-` is reserved for attaching optional parameters to commands.
 
@@ -47,6 +51,8 @@ Or another common approach is to specify the full location of the file using `./
 
 Password: 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
 
+---
+
 #### Level 3
 Spaces are also interpreted by linux bash as extra parameters, you could say. So reading the file using `cat spaces in the filename` would not work. It would only register the first parameter `cat` but not recognize the other words that are part of the file name.
 
@@ -55,6 +61,8 @@ An easy fix for this is to put quote around it like this:
 `cat "spaces in the filename"`
 
 Password: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+---
 
 #### Level 4
 Hidden files are denoted with a `.` at the start of their filename which causes them to be invisible through the usual `ls` command.
@@ -67,6 +75,8 @@ However, `ls` has plenty of optional parameters, one being `-a` which makes it s
 > directoryname`.
 
 Password: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+---
 
 #### Level 5
 To find out about the type of a file, use the `file` command.
@@ -82,6 +92,8 @@ To display the types of each file in the current working directory, you can use:
 where `*` is a wildcard character that matches everything.
 
 Password: 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+---
 
 #### Level 6
 We need to find a file in the inhere directory that has all the following properties:
@@ -113,6 +125,8 @@ Therefore, the full line to find the file we are looking for is:
 
 Password: HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
 
+---
+
 #### Level 7
 We need to find a file that has all the following properties:
 
@@ -137,6 +151,8 @@ The other necessary components have already been covered in the previous level. 
 
 Password: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
 
+---
+
 #### Level 8
 We need to find the password in the file `data.txt` next to the word **millionth**.
 
@@ -151,6 +167,8 @@ Simply use the `grep` command by adding a string pattern in double quotes, and t
 `grep "millionth" data.txt`
 
 Password: dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+
+---
 
 #### Level 9
 We need to find the password in the file `data.txt` and is the only line of text that occurs only once.
@@ -173,6 +191,8 @@ So in order to print all unique lines, we would need to sort them first so that 
 
 Password: 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
 
+---
+
 #### Level 10
 We are again tasked with finding the password in the file `data.txt` and we are told that it is in one of the few human-readable strings, preceded by several '=' characters.
 
@@ -194,6 +214,8 @@ We will end up with a few matches, with the last one being the password for band
 
 Password: FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
 
+---
+
 #### Level 11
 For encoding a string to base64 or decoding base64 encoded data, the `base64` command comes in handy.
 
@@ -202,6 +224,8 @@ The command by default encodes data to a base64 format in a file, not the other 
 `base64 -d data.txt`
 
 Password: dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+
+---
 
 #### Level 12
 We are told that all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions. This is known as [ROT13](https://en.wikipedia.org/wiki/ROT13) and is in fact a variation of the famous Caesar cipher.
@@ -248,6 +272,8 @@ What this does is map 'N' to 'A', ... , 'Z' to 'M', ... , 'M' to 'Z'.
 > with Bash](https://askubuntu.com/questions/1097761/changing-individual-letter-position-with-bash)
 
 Password: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+---
 
 #### Level 13
 We are told that the file `data.txt` is a [hexdump](https://en.wikipedia.org/wiki/Hex_dump) of a file that has been repeatedly compressed.
@@ -328,6 +354,8 @@ After that, it is just repeatedly finding the type of the file, renaming it, and
 
 Password: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 
+---
+
 #### Level 14
 To login to bandit14, we can use the private [SSH](https://help.ubuntu.com/community/SSH/OpenSSH/Keys) key from the root directory. Use the `-i` flag in conjunction with the `ssh` command. Refer back to the [ssh](https://linux.die.net/man/1/ssh) manual for further information.
 
@@ -344,6 +372,8 @@ After successfully logging in, we can simply read the file that contains the pas
 `cat /etc/bandit_pass/bandit14`
 
 Password: MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+
+---
 
 #### Level 15
 We are told that the password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
@@ -369,4 +399,29 @@ Password: 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
 > [Localhost](https://en.wikipedia.org/wiki/Localhost) <br>
 > [Ports](https://computer.howstuffworks.com/web-server8.htm)
 
+---
+
 #### Level 16
+We are told that the password for the next level can be retrieved by submitting the password of the current level (refer back to Level 15) to port 30001 on localhost using SSL/TLS encryption.
+
+In order to connect to a remote host using SSL/TLS encryption, we can use the `openssl` command which is essentially a toolkit that implements SSL and TLS network protocols. It has an abundance of commands accompanied with a variety of options and arguments. Refer to the [openssl](https://linux.die.net/man/1/openssl) manual page for more information.
+
+For our purpose, we need to use the `s_client` command to connect to a remote host using SSL/TLS. To connect to a particular host and port, use `-connect host:port`. For more information, refer to the [s_client](https://linux.die.net/man/1/s_client) manual page.
+
+So, by following the instructions:
+
+`openssl s_client -connect localhost:30001`
+
+This creates a secure connection to the localhost on port 30001 and we can again proceed by entering last level's password. Lo and behold, the response will be the password to move onto the next level.
+
+Password: 
+
+---
+
+**Reading Material**
+> [What is SSL/TLS?](https://en.wikipedia.org/wiki/Transport_Layer_Security) <br>
+> [OpenSSL](https://www.feistyduck.com/library/openssl-cookbook/online/testing-with-openssl/index.html)
+
+---
+
+#### Level 17
