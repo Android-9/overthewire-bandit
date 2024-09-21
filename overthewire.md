@@ -567,3 +567,16 @@ Password: cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
 ---
 
 #### Level 20
+Executable files can have an access rights flag **setuid** which allows users to run an executable with the file system permissions of the executable's owner or group. Read the [setuid](https://en.wikipedia.org/wiki/Setuid) wiki for more information.
+
+When you run the setuid binary file `bandit20-do` without any arguments using:
+
+`./bandit20-do`
+
+It directly tells you that you can run commands as another user (in this case bandit20). So with this information, you might think to read the password file in `/etc/bandit_pass/bandit20` because you can act as bandit20 and thus have the permission to read it.
+
+`./bandit20-do cat /etc/bandit_pass/bandit20`
+
+Password: 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+
+#### Level 21
