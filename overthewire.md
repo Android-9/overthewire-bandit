@@ -624,7 +624,7 @@ If you go over to `/etc/cron.d/` you will find various cronjobs, in particular, 
 * * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
 ```
 
-You can see that this cronjob runs the shell file `/usr/bin/cronjob_bandit22.sh` repeatedly every minute.
+You can see that this cronjob runs the shell file `/usr/bin/cronjob_bandit22.sh` as bandit22 repeatedly every minute.
 
 Navigate to this script to see what is being executed.
 
@@ -645,3 +645,64 @@ Password: tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q
 ---
 
 #### Level 23
+This level is very similar to the previous level.
+
+Go over to `/etc/cron.d/` and you will find `cronjob_bandit23`. Read through the contents of the file:
+
+```
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+```
+
+Again, you can see that this cronjob runs the shell file `/usr/bin/cronjob_bandit23.sh` as bandit23 every minute, every day.
+
+Navigate to this script to see what is being executed.
+
+```bash
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+```
+
+The first line sets a variable `myname` as the output of the command `whoami` which prints the user that ran the command. In this case, it would be bandit23.
+
+> Note that in order to access the output of a command and store it in a variable you follow the format: `variable=$(command)`. The `$` is used to access a variable or the return of a command.
+
+Next, it sets another variable `mytarget` as this entire line:
+
+`echo I am user $myname | md5sum | cut -d ' ' -f 1`
+
+To break it down, the first part simply prints 'I am user bandit23', as the variable `myname` would be set to bandit23.
+
+Then this output gets passed onto another command `md5sum`. [md5sum](https://man7.org/linux/man-pages/man1/md5sum.1.html) is a command that computes and verifies MD5 hashes. It is a hashing algorithm.
+
+If you were to run the first two commands...
+
+`echo I am user $myname | md5sum`
+
+You will get a cryptic string:
+
+`8ca319486bfbbc3663ea0fbe81326349  -`
+
+This is a hash of 'I am user bandit23' using MD5.
+
+Lastly, the `cut` command is used to cut out sections from each line of a file. By default, the field delimiter is a TAB. You can specify your own delimiter by using `-d`. Looking at the command above, you can see that the delimiter has been specified to be a space. The `-f` option allows you to select only certain fields and prints any line that contains no delimiter character. The command specifies 1 which points to the first element. Refer to the [cut](https://man7.org/linux/man-pages/man1/cut.1.html) manual for more information.
+
+The string will be split and only the first part selected, leaving you with:
+
+`8ca319486bfbbc3663ea0fbe81326349`
+
+Finally, on the last line it again reads the contents of the `bandit23` password file and outputs it to the `/tmp` directory under the name of the string above.
+
+Reading that file with `cat /tmp/8ca319486bfbbc3663ea0fbe81326349` yields the password for the next level.
+
+Password: 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
+
+---
+
+#### Level 24
