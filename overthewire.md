@@ -612,4 +612,36 @@ This will then read the password that was returned from the listener, and compar
 
 Password: EeoULMCra2q0dSkYj561DX7s1CpBuOBt
 
+---
+
 #### Level 22
+[Cron](https://www.geeksforgeeks.org/cron-command-in-linux-with-examples/) is a utility that as described in the level description, is a time-based job scheduler. You can create what's known as a 'crontab' which is a file that tells Cron to run some command at some particular time and date in equal intervals. System admins often create their own crontabs to automate tedious processes that need to be run regularly.
+
+If you go over to `/etc/cron.d/` you will find various cronjobs, in particular, one called `cronjob_bandit22`. If you read the file using `cat` you will get:
+
+```
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+```
+
+You can see that this cronjob runs the shell file `/usr/bin/cronjob_bandit22.sh` repeatedly every minute.
+
+Navigate to this script to see what is being executed.
+
+`cat /user/bin/cronjob_bandit.sh`
+
+```bash
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+```
+
+This script creates a new file in the `/tmp` directory that gives read access to all users as given by the 4 at the end. Then, it prints the contents of the `bandit22` file which contains the password and outputs it into the new file.
+
+Now, just go ahead and read the new file to obtain the password for the next level.
+
+Password: tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q
+
+---
+
+#### Level 23
