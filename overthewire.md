@@ -582,3 +582,34 @@ Password: 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
 ---
 
 #### Level 21
+In this level there is another setuid binary file but this time, it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level. If the password is correct, it transmits the password for the next level.
+
+You first need to launch your own server that can be connected to. The command `netcat` or `nc` can function as a server, listening to inbound connections the specified port. For more information, read the [nc](https://www.commandlinux.com/man-page/man1/nc.1.html) manual.
+
+To setup a simple listener, use:
+
+`netcat -l -p 1234 &`
+
+Or
+
+`netcat -lp 1234 &`
+
+1234 is just some arbitrary port number. Note that you can also use `nc`, they are interchangeable.
+
+> Notice the `&` attached at the end is used to tell the system to run the command in the background. This is related to Unix 'job control' commands. You can always see all jobs using the `jobs` command.
+
+**However**, this is not sufficient because what you want is when you connect to this server, it should output the previous level's password. In order to do this, use the `|` as learned in an earlier level and attach `echo "password"` to the start.
+
+`echo "password" | nc -lp 1234 &`
+
+> The `echo` command simply prints anything you put after it.
+
+Once you have this running in the background, you can run the executable on the port 1234:
+
+`./suconnect 1234`
+
+This will then read the password that was returned from the listener, and compare it to the previous level's password. Assuming there were no errors, it should give back the password for the next level.
+
+Password: EeoULMCra2q0dSkYj561DX7s1CpBuOBt
+
+#### Level 22
