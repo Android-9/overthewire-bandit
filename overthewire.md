@@ -840,3 +840,64 @@ Password: iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
 ---
 
 #### Level 26
+If you look at the root directory, you will see a file `bandit26.sshkey`. This looks identical to Level 14, so you might think to try just using `ssh bandit26@localhost -p 2220 -i bandit26.sshkey`. What you will find is that it successfully logs you in but then closes immediately after printing a nice ASCII 'bandit26' banner.
+
+We are told that the shell for user bandit26 is not `/bin/bash`, but something else.
+
+In order to see more information about each user and their default shell, read the `/etc/passwd` file. Read [this](https://www.cherryservers.com/blog/linux-list-users#:~:text=To%20list%20users%20in%20a,command%20line%20utility%20as%20shown.&text=The%20command%20prints%20out%20the,user%20using%20the%20grep%20command.) for more information.
+
+```bash
+bandit25@bandit:~$ cat /etc/passwd | grep -i bandit26
+bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext
+```
+
+You can see that it points to `/usr/bin/showtext`. Look at the contents of the file.
+
+```bash
+#!/bin/sh
+
+export TERM=linux
+
+exec more ~/text.txt
+exit 0
+```
+
+The program executes the command `more` for a text file in the root directory and then exits immediately. This explains why you get logged out as soon as you connect. It also explains the ASCII banner printed, which can be deduced to be the `text.txt` file.
+
+The [more](https://www.geeksforgeeks.org/more-command-in-linux-with-examples/) command is used to view text files that are often too large to fit in the shell window. Doing a little bit more digging, you will find that it creates a separate view like using `nano` or `vim` and the command will not end until you quit it. However, the command will not open this view if the text already fits the window.
+
+Thus, you can try resizing the terminal window such that the ASCII banner cannot be fully displayed, so when you login to bandit26, it will not immediately exit.
+
+Next, from reading the [more](https://man7.org/linux/man-pages/man1/more.1.html) manual page, pressing `v` will let you enter an editor (by default, vim).
+
+Once you are in the vim editor, the next task would be to change the shell back to `/bin/bash`. To do this, with the help of some [searching](https://superuser.com/questions/287994/how-to-specify-shell-for-vim), you will learn that you can enter commands in the vim editor.
+
+`:set shell=/bin/bash`
+
+Sets the shell to `/bin/bash`. After this, you can invoke a shell session with `:shell`.
+
+Finally, after gaining access to bandit26, all you have to do is read the password from `/etc/bandit_pass/bandit26`.
+
+`cat /etc/bandit_pass/bandit26`
+
+Password: s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
+
+---
+
+#### Level 27
+After logging in straight from Level 26, if you list all files in the root directory you will find a setuid binary file just like the one in Level 20.
+
+Running the file yields the same message.
+```bash
+bandit26@bandit:~$ ./bandit27-do
+Run a command as another user.
+  Example: ./bandit27-do id
+```
+
+Simply do the same thing as done in Level 20.
+
+`./bandit27-do cat /etc/bandit_pass/bandit27`
+
+Password: upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
+
+#### Level 28
