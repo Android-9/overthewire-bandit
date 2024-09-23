@@ -783,4 +783,60 @@ Wait approximately 60 seconds, then list the files in the current working direct
 
 Password: gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
 
+---
+
 #### Level 25
+You are told that a daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, calling brute-forcing. 
+
+Create another temporary directory with `mktemp -d`, then navigate to it.
+
+You can test the port by using `netcat localhost 30002`:
+
+```bash
+bandit24@bandit:~$ netcat localhost 30002
+I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+abc
+Wrong! Please enter the correct current password and pincode. Try again.
+
+```
+
+After playing around with this, it makes sense to create a script that tests every possible combination.
+
+However, using something like `echo "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 0000" | netcat localhost 30002` only works for one password. If you wrote the script like this, it would have to repeatedly connect to the port which is not a great idea because you would end up with thousands of jobs.
+
+What you need to do is create a separate text file that holds all possible combinations separated by a newline. Read [this](https://askubuntu.com/questions/1004901/connect-via-netcat-and-send-messages-in-bash-script).
+
+First create a file called `passwords.txt`.
+
+Next open up `nano` or `vim` to write a script `bruteforce.sh`:
+
+```bash
+#!/bin/bash
+
+cd /tmp/tmp.ZCpD4POwi7
+
+for i in {0000..9999};
+do
+  printf "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 %d\n" $i >> passwords.txt
+done
+```
+
+This script navigates to the temporary directory and then runs a for loop from 0000 to 9999. Looping through a range of numbers follows the format `{num1..num2}`, for example if you want to loop through 1-100 you would write `{1..100}`. If you want to include extra zeros you can do `{000..100}`.
+
+This writes every possible password combination into the `passwords.txt` file separated by a newline for each one.
+
+> Make sure you do not forget to change the permisions of the script so that it can be executed.
+
+Execute the script with `./bruteforce.sh`. You can check the `passwords.txt` file has changed with `head passwords.txt`.
+
+Then you run:
+
+`nc localhost 30002 < msg.txt`
+
+This will connect to the port and feed each line as input sequentially. The process will stop when the password is correct.
+
+Password: iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
+
+---
+
+#### Level 26
