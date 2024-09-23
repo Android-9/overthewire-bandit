@@ -1105,3 +1105,37 @@ Password: fb5S2xb7bRyFmAvQYQGEqsbhVyJqhnDy
 ---
 
 #### Level 32
+Clone the repository as per usual.
+
+`git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo`
+
+Enter the password obtained from the previous level.
+
+Once the repository has been cloned, go into the repo directory and you will again find a `README.md` file. It reads:
+
+```
+This time your task is to push a file to the remote repository.
+
+Details:
+    File name: key.txt
+    Content: 'May I come in?'
+    Branch: master
+```
+
+First, create the text file `key.txt` with the content 'May I come in?':
+
+`echo 'May I come in?' > key.txt`
+
+Next, add the file to be committed using `git add`. It is used to add all files that you want to be committed or saved. You will find that you are unable to add `key.txt` because the `.gitignore` file says to ignore `.txt` files. You can force it by using `git add -f key.txt`.
+
+Once the file has been added, you can proceed to commit the changes. Use `git commit` for this. It will open up a text editor to ask for a message for the commit, you can type anything you want here. Alternatively, you can use `git commit -m "abc"` to add a quick message.
+
+Finally, you can push your local changes to the remote repository using `git push`.
+
+A message will show up to validate that the file is exactly as specified. If no there were no typos, it should give you the password for the next level.
+
+Password: 3O9RfhqyAlVBEZpVb6LYStshZoqoSx5K
+
+---
+
+#### Level 33
