@@ -1074,3 +1074,34 @@ Password: qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL
 ---
 
 #### Level 31
+Clone the repository as per usual.
+
+`git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo`
+
+Enter the password obtained from the previous level.
+
+Once the repository has been cloned, go into the repo directory and you will again find a `README.md` file. It reads:
+
+`just an epmty file... muahaha`
+
+This provides nothing useful.
+
+The logs show nothing, and there is only branch.
+
+However there is one important feature that has yet to be covered. [Git tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging) are used to mark specific points in the history of a repository. Often times developers use this to mark release versions such as v1.0, v2.0...
+
+To list all tags, use `git tag`.
+
+This in fact shows a tag called 'secret'.
+
+To look at any data that was attached alongside the tag, you can use `git show`.
+
+`git show secret`
+
+This yields the password for the next level.
+
+Password: fb5S2xb7bRyFmAvQYQGEqsbhVyJqhnDy
+
+---
+
+#### Level 32
