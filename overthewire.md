@@ -928,3 +928,94 @@ Password: Yz9IpL0sBcCeuG7m9uQFt8ZNpS4HZRcN
 ---
 
 #### Level 29
+Clone the repository as per usual.
+
+`git clone ssh://bandit28-git@localhost:2220/home/bandit28-git/repo`
+
+Enter the password obtained from the previous level.
+
+Once the repository has been cloned, go into the repo directory and you will again find a `README.md` file. It reads:
+
+```markdown
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+```
+
+You can see that the password is masked. However, it is possible that in an earlier version it was not.
+
+To view the git log history for this repository, use the command `git log`. Looking through the [git-log](https://git-scm.com/docs/git-log) documentation, you can use the option `-p` to show the actual changes done rather than just the commit message. [Here](https://stackoverflow.com/questions/11950037/view-git-history-for-folder) is another useful resource.
+
+This will show the commit history and diffs:
+
+```
+bandit28@bandit:/tmp/tmp.9daPu4LyBe/repo$ git log -p
+commit 817e303aa6c2b207ea043c7bba1bb7575dc4ea73 (HEAD -> master, origin/master, origin/HEAD)
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Sep 19 07:08:39 2024 +0000
+
+    fix info leak
+
+diff --git a/README.md b/README.md
+index d4e3b74..5c6457b 100644
+--- a/README.md
++++ b/README.md
+@@ -4,5 +4,5 @@ Some notes for level29 of bandit.
+ ## credentials
+
+ - username: bandit29
+-- password: 4pT1t5DENaYuqnqvadYs1oE4QLCdjmJ7
++- password: xxxxxxxxxx
+
+
+commit 3621de89d8eac9d3b64302bfb2dc67e9a566decd
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Sep 19 07:08:39 2024 +0000
+
+    add missing data
+
+diff --git a/README.md b/README.md
+index 7ba2d2f..d4e3b74 100644
+--- a/README.md
++++ b/README.md
+@@ -4,5 +4,5 @@ Some notes for level29 of bandit.
+ ## credentials
+
+ - username: bandit29
+-- password: <TBD>
++- password: 4pT1t5DENaYuqnqvadYs1oE4QLCdjmJ7
+
+
+commit 0622b73250502618babac3d174724bb303c32182
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu Sep 19 07:08:39 2024 +0000
+
+    initial commit of README.md
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..7ba2d2f
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,8 @@
++# Bandit Notes
++Some notes for level29 of bandit.
++
++## credentials
++
++- username: bandit29
++- password: <TBD>
++
+```
+
+Simple as that, you can find the password in one of the commits.
+
+Password: 4pT1t5DENaYuqnqvadYs1oE4QLCdjmJ7
+
+---
+
+#### Level 30
