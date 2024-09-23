@@ -900,4 +900,31 @@ Simply do the same thing as done in Level 20.
 
 Password: upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
 
+---
+
 #### Level 28
+[Git](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) is essentially a system that back-ups files. In other words, a version control system. It keeps track of versions of files, like a snapshot at a particular date and time.
+
+This is not a Git tutorial as there are plenty of guides and documentation that teach the basics.
+
+First, create a temporary directory using `mktemp -d`, and navigate to it as cloning a repository means copying and creating files locally from the server.
+
+To clone a repository, use the command `git clone repoaddress`.
+
+According to the [git-clone](https://linux.die.net/man/1/git-clone) manual page, you can specify a port after the hostname.
+
+In this case:
+
+`git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo`
+
+Notice where the port number is.
+
+It will ask for the password, use the password obtained from the last level and it will clone the repository in the temporary directory.
+
+A new directory called `repo` will appear. Inside is a `README` that contains the password for the next level.
+
+Password: Yz9IpL0sBcCeuG7m9uQFt8ZNpS4HZRcN
+
+---
+
+#### Level 29
