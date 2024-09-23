@@ -1139,3 +1139,23 @@ Password: 3O9RfhqyAlVBEZpVb6LYStshZoqoSx5K
 ---
 
 #### Level 33
+After logging into the shell, you will find that this is not your typical bash shell. It says "WELCOME TO THE UPPERCASE SHELL" and if you try to run any of the usual commands it fails with a message "Permission denied". It becomes obvious that this shell takes any input and converts it to uppercase before executing the command.
+
+Most things in Linux are lowercase, however environment variables are not. These are variables that are available systemwide and the whole list of them can be seen with the command `printenv`. One particular variable `$0` stores the name of the script that is being executed.
+
+If you were to type `echo $0` it would print the name of the current shell. Typing just `$0` simply spawns a new shell. A better explanation can be found [here](https://david-varghese.medium.com/overthewire-bandit-level-32-level-33-bebdbb36ffb5).
+
+Knowing this, you can escape out of the uppercase shell by typing `$0`.
+
+Once you are out, you can start using commands again. Checking all the files you will find that `uppershell` is run as bandit33 which would imply you must have the same privileges.
+
+If you check what user you are with `whoami` it in fact returns bandit33.
+
+This means that you can access the password with `cat /etc/bandit_pass/bandit23`.
+
+Password: tQdtbs5D5i2vJwkO8mEyYEyTL8izoeJ0
+
+---
+
+#### Level 34
+Coming soon...
