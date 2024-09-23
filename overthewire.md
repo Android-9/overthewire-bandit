@@ -1019,3 +1019,58 @@ Password: 4pT1t5DENaYuqnqvadYs1oE4QLCdjmJ7
 ---
 
 #### Level 30
+Clone the repository as per usual.
+
+`git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo`
+
+Enter the password obtained from the previous level.
+
+Once the repository has been cloned, go into the repo directory and you will again find a `README.md` file. It reads:
+
+```markdown
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: <no passwords in production!>
+```
+
+It says that there are no passwords in production. That suggests there may be other concurrent versions that are still under development. 
+
+This is known as [branches](https://www.w3schools.com/git/git_branch.asp?remote=github) in Git. A branch is like a separate version of the main/master repository. You can tinker and change this version while keeping the main repository unchanged. When everything has been finalized, it can then be merged back to the master branch to apply all the changes. This allows developers to work on new features or fix bugs in a separate development branch while still having a functional production branch.
+
+Reading through the [git-branch](https://git-scm.com/docs/git-branch) manual page, it can be found that to list all branches, you use `git branch -a`.
+
+```
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/dev
+  remotes/origin/master
+  remotes/origin/sploits-dev
+```
+
+You can see one of the branches is named `dev`. That might be a good place to look. To switch branches, use `git switch` or `git checkout`.
+
+`git switch dev`
+
+This time when you list the files, you will notice a code file. That is not relevant but if you look through the `README.md`:
+
+```markdown
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL
+```
+
+Voila, in this dev branch the password has been added.
+
+Password: qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL
+
+---
+
+#### Level 31
