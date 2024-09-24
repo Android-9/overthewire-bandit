@@ -788,7 +788,7 @@ Password: gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
 ---
 
 #### Level 25
-You are told that a daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, calling brute-forcing. 
+You are told that a daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing. 
 
 Create another temporary directory with `mktemp -d`, then navigate to it.
 
