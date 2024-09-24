@@ -528,6 +528,8 @@ The first password corresponds to the first file (`passwords.new`) and the secon
 
 Password: x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
 
+---
+
 #### Level 19
 The password for the next level is simply in a file `readme` in the home directory. However, the issue is when you try and login normally with `ssh` it logs you out immediately with a message "Byebye!".
 
