@@ -819,7 +819,7 @@ cd /tmp/tmp.ZCpD4POwi7
 
 for i in {0000..9999};
 do
-  printf "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 %d\n" $i >> passwords.txt
+  printf "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 %s\n" $i >> passwords.txt
 done
 ```
 
@@ -833,7 +833,7 @@ Execute the script with `./bruteforce.sh`. You can check the `passwords.txt` fil
 
 Then you run:
 
-`nc localhost 30002 < msg.txt`
+`nc localhost 30002 < passwords.txt`
 
 This will connect to the port and feed each line as input sequentially. The process will stop when the password is correct.
 
