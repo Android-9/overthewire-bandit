@@ -146,7 +146,7 @@ The other necessary components have already been covered in the previous level. 
 > if you tried to run this line without it, there would
 > be lots of 'Permission Denied' messages for files that
 > we do not have access for so to make things easier to
-> find the file that is accessable, you can hide all the
+> find the file that is accessible, you can hide all the
 > unnecessary information.
 
 Password: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
@@ -198,7 +198,7 @@ We are again tasked with finding the password in the file `data.txt` and we are 
 
 A new command that will come in very handy for this level is the `strings` command. This prints strings of printable characters in a file. So this works great for our purpose because if you were to try and read the `data.txt` file, you would find that it is full of non-human-readable text.
 
-After we eliminate the unnecessary data, we are left with a more digestable number of lines that we can go through.
+After we eliminate the unnecessary data, we are left with a more digestible number of lines that we can go through.
 
 But, we can do better than that to narrow our search down to only a couple lines. We are told that the password is preceded by several '=' characters, so we can simply use `grep` to look for lines that start with or just have those characters. By default, `grep` finds all matches including partial matches so as long as the line has the pattern somewhere, it will be registered as a match.
 
@@ -297,7 +297,7 @@ Now, we can begin.
 
 `xxd -r abc new`
 
-Where 'new' is just an arbitary name for the output file.
+Where 'new' is just an arbitrary name for the output file.
 
 Now that we have converted the hexdump back to its original binary form, the next step is to start decompressing it. However before that, we need to know the type of the file / compression in order to determine what decompression to use.
 
@@ -388,7 +388,7 @@ So, in order to communicate with the localhost on port 30000:
 
 Doing so will connect you to that port, and you can begin submitting messages.
 
-Submitting the pasword for the previous level yields the next password.
+Submitting the password for the previous level yields the next password.
 
 Password: 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
 
@@ -484,7 +484,7 @@ Remember `openssl s_client -connect localhost:portnumber`.
 
 > If you are encountering problems with submitting the password like "DONE", "RENOGOTIATING" or "KEYUPDATE", add an option `-quiet` at the end. For more information, read this [section](https://linux.die.net/man/1/s_client#:~:text=for%20all%20others.-,Connected%20Commands,-If%20a%20connection) in the `s_client` manual page.
 
-What you will find is that port number 31790 is the correct server. The responese will be in the form of an RSA private key, however it is not really usable at the moment because we need it in a file.
+What you will find is that port number 31790 is the correct server. The response will be in the form of an RSA private key, however it is not really usable at the moment because we need it in a file.
 
 So, we will have to create another temporary directory with `mktemp -d`. Navigate to this directory for easier access.
 
@@ -513,7 +513,7 @@ Password: EReVavePLFHtFlFsjn3hyzMlvSuSAcRD
 #### Level 18
 There are two files in the home directory: `passwords.old` and `passwords.new`. We are told the password for the next level is in `passwords.new` and is the only line that has been changed between the two files.
 
-The `diff` command compares files line by line and by default prints the differences betweeen the files. For more information, refer to the [diff](https://linux.die.net/man/1/diff) manual page.
+The `diff` command compares files line by line and by default prints the differences between the files. For more information, refer to the [diff](https://linux.die.net/man/1/diff) manual page.
 
 `diff passwords.new passwords.old`
 
@@ -584,7 +584,7 @@ Password: 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
 ---
 
 #### Level 21
-In this level there is another setuid binary file but this time, it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level. If the password is correct, it transmits the password for the next level.
+In this level there is another setuid binary file but this time, it makes a connection to localhost on the port you specify as a command line argument. It then reads a line of text from the connection and compares it to the password in the previous level. If the password is correct, it transmits the password for the next level.
 
 You first need to launch your own server that can be connected to. The command `netcat` or `nc` can function as a server, listening to inbound connections the specified port. For more information, read the [nc](https://www.commandlinux.com/man-page/man1/nc.1.html) manual.
 
@@ -788,7 +788,7 @@ Password: gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
 ---
 
 #### Level 25
-You are told that a daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing. 
+You are told that a daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pin code. There is no way to retrieve the pin code except by going through all of the 10000 combinations, called brute-forcing. 
 
 Create another temporary directory with `mktemp -d`, then navigate to it.
 
